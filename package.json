@@ -2,9 +2,9 @@
   "name": "file-manager",
   "version": "1.0.0",
   "description": "The Node.js File Manager CLI facilitates efficient file operations through Streams API. Users navigate directories, perform manipulations, access host machine info, compute file hashes, and use Brotli compression.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "author": "",
