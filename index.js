@@ -6,6 +6,8 @@ function start() {
   const userNameArg = process.argv[2]?.slice(2);
   const greeting = "Welcome to the File Manager";
   const homeDirectory = os.homedir();
+  const resetColor = '\x1b[0m';
+  const greenColor = '\x1b[32m';
 
   let userName = "";
   if (userNameArg) {
@@ -15,7 +17,7 @@ function start() {
     userName = 'Anonymous'
   }
   console.log(`${greeting}, ${userName}!`);
-  console.log(`You are currently in ${homeDirectory}`);
+  console.log(`${greenColor}You are currently in ${homeDirectory}${resetColor}`);
 
   createReadlineInterface(userName, homeDirectory)
 }

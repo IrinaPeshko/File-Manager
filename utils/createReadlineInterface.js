@@ -6,12 +6,14 @@ import { handleInputResult } from "./handleInputResult.js";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 export async function createReadlineInterface(username, homeDirectory) {
+  const resetColor = '\x1b[0m';
+  const greenColor = '\x1b[32m';
   const rl = readline.createInterface({ input, output });
   const directory = { currentDirectory: homeDirectory };
 
   rl.on("line", async (input) => {
     await handleInputResult(input.trim(), rl, directory);
-    console.log(`You are currently in ${directory["currentDirectory"]}`);
+    console.log(`${greenColor}You are currently in ${directory["currentDirectory"]}${resetColor}`);
   });
  
   rl.on("close", () => {
