@@ -9,8 +9,8 @@ export async function createReadlineInterface(username, homeDirectory) {
   const rl = readline.createInterface({ input, output });
   const directory = { currentDirectory: homeDirectory };
 
-  rl.on("line", (input) => {
-    handleInputResult(input.trim(), rl, directory);
+  rl.on("line", async (input) => {
+    await handleInputResult(input.trim(), rl, directory);
     console.log(`You are currently in ${directory["currentDirectory"]}`);
   });
  
