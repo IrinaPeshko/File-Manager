@@ -36,7 +36,7 @@ export const mv = async (input, directory) => {
 
       writeStream.on("error", reject);
     });
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";

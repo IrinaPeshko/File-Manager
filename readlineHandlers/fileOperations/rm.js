@@ -16,7 +16,7 @@ export const rm = async (input, directory) => {
     if (!isFile) throw new Error("Invalid input");
 
     await fs.rm(pathFileToRemove);
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";

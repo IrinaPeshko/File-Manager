@@ -22,7 +22,7 @@ export const cat = async (input, directory) => {
         console.log(chunk);
       });
     });
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";

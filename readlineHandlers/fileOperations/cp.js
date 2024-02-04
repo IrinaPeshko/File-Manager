@@ -30,7 +30,7 @@ export const cp = async (input, directory) => {
       writeStream.on("close", resolve);
       readStream.pipe(writeStream);
     });
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";

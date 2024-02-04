@@ -15,7 +15,7 @@ export const rn = async (input, directory) => {
     const lastFileDirectory = path.dirname(lastFilePath);
     const newFilePath = path.join(lastFileDirectory, params[1]);
     await fs.rename(lastFilePath, newFilePath);
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";

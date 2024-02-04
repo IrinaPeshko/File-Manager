@@ -11,7 +11,7 @@ export const cd = async(input, directory) => {
     const isDir = await checkPath(newPath, "dir");
     if (!isDir) throw new Error(`"Invalid input"`);
     directory["currentDirectory"] = newPath;
-  } catch {
+  } catch (err) {
     let errMessage = "Operation failed";
     if (err.message === "Invalid input") {
       errMessage = "Invalid input";
