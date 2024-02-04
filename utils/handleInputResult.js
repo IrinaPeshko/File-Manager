@@ -1,9 +1,10 @@
-import { add } from "../readlineHandlers/add.js";
-import { cat } from "../readlineHandlers/cat.js";
-import { cd } from "../readlineHandlers/cd.js";
-import { exit } from "../readlineHandlers/exit.js";
-import { ls } from "../readlineHandlers/ls.js";
-import { up } from "../readlineHandlers/up.js";
+import { add } from "../readlineHandlers/fileOperations/add.js";
+import { cat } from "../readlineHandlers/fileOperations/cat.js";
+import { cd } from "../readlineHandlers/navigation/cd.js";
+import { exit } from "../readlineHandlers/navigation/exit.js";
+import { ls } from "../readlineHandlers/navigation/ls.js";
+import { rn } from "../readlineHandlers/fileOperations/rn.js";
+import { up } from "../readlineHandlers/navigation/up.js";
 import path from "path";
 
 export async function handleInputResult(input, rl, directory) {
@@ -16,11 +17,13 @@ export async function handleInputResult(input, rl, directory) {
   } else if (input === ".exit") {
     exit(rl)
   } else if (input.startsWith("cd")) {
-    cd(input, directory)
+    await cd(input, directory)
   } else if (input.startsWith("cat")) {
     await cat(input, directory)
   } else if (input.startsWith("add")) {
-    add(input, directory)
+    await add(input, directory)
+  } else if (input.startsWith("rn")) {
+    await rn(input, directory)
   } else {
     console.log(`Invalid input`);
   }
