@@ -6,6 +6,7 @@ import { ls } from "../readlineHandlers/navigation/ls.js";
 import { rn } from "../readlineHandlers/fileOperations/rn.js";
 import { up } from "../readlineHandlers/navigation/up.js";
 import { cp } from "../readlineHandlers/fileOperations/cp.js";
+import { mv } from "../readlineHandlers/fileOperations/mv.js";
 
 export async function handleInputResult(input, rl, directory) {
   if (input === "hello") {
@@ -26,6 +27,8 @@ export async function handleInputResult(input, rl, directory) {
     await rn(input, directory)
   } else if (input.startsWith("cp")) {
     await cp(input, directory)
+  } else if (input.startsWith("mv")) {
+    await mv(input, directory)
   } else {
     console.log(`Invalid input`);
   }

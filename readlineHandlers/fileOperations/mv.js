@@ -3,7 +3,7 @@ import { createReadStream, createWriteStream, promises as fs } from "fs";
 import { getUserParamsArr } from "../../utils/getUserParamsArr.js";
 import { checkPath } from "../../utils/checkPath.js";
 
-export const cp = async (input, directory) => {
+export const mv = async (input, directory) => {
   try {
     const params = getUserParamsArr(input);
     if (params.length !== 2) throw new Error("Enter correct params");
@@ -12,21 +12,30 @@ export const cp = async (input, directory) => {
     const isFile = await checkPath(baseFilePath, "file");
     if (!isFile) throw new Error("file does not exist");
 
-    const newFileDirectory = path.resolve(directory["currentDirectory"], params[1]);
+    const newFileDirectory = path.resolve(
+      directory["currentDirectory"],
+      params[1]
+    );
     const isDirectory = await checkPath(newFileDirectory, "dir");
     if (!isDirectory) throw new Error("directory does not exist");
 
     const fileName = path.basename(baseFilePath);
-    const newFilePath = path.join(newFileDirectory,fileName)
+    const newFilePath = path.join(newFileDirectory, fileName);
 
     await new Promise((resolve, reject) => {
-        const readStream = createReadStream(baseFilePath);
-        const writeStream = createWriteStream(newFilePath, { flags: "wx" });
-        readStream.on("error", (e) => reject(`reading error: ${e.message}`));
-        writeStream.on("error", (e) => reject(`writing error: ${e.message}`));
-        writeStream.on("close", resolve);
-        readStream.pipe(writeStream);
-    })
+      const readStream = createReadStream(baseFilePath);
+      const writeStream = createWriteStream(newFilePath, { flags: "wx" });
+      readStream.on("error", (e) => reject(`reading error: ${e.message}`));
+      writeStream.on("error", (e) => reject(`writing error: ${e.message}`));
+      writeStream.on("close", resolve);
+      readStream.pipe(writeStream);
+      writeStream.on("finish", async () => {
+        await fs.unlink(baseFilePath);
+        resolve();
+      });
+
+      writeStream.on("error", reject);
+    });
   } catch {
     console.log("Operation failed");
   }
