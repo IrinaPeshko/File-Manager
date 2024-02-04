@@ -9,6 +9,7 @@ import { cp } from "../readlineHandlers/fileOperations/cp.js";
 import { mv } from "../readlineHandlers/fileOperations/mv.js";
 import { rm } from "../readlineHandlers/fileOperations/rm.js";
 import { getSystemInfo } from "../readlineHandlers/systemInfo/os.js";
+import { hash } from "../readlineHandlers/hash/hash.js";
 
 export async function handleInputResult(input, rl, directory) {
   if (input === "hello") {
@@ -35,7 +36,9 @@ export async function handleInputResult(input, rl, directory) {
     await rm(input, directory)
   } else if (input.startsWith("os")) {
     await getSystemInfo(input, directory)
-  }else {
+  } else if (input.startsWith("hash")) {
+    await hash(input, directory)
+  } else {
     console.log("\x1b[31mInvalid input\x1b[0m");
   } 
 }
