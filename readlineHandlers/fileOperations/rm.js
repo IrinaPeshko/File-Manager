@@ -6,14 +6,21 @@ import { checkPath } from "../../utils/checkPath.js";
 export const rm = async (input, directory) => {
   try {
     const params = getUserParamsArr(input);
-    if (params.length !== 1) throw new Error("Enter correct params");
+    if (params.length !== 1) throw new Error("Invalid input");
 
-    const pathFileToRemove = path.resolve(directory["currentDirectory"], params[0]);
+    const pathFileToRemove = path.resolve(
+      directory["currentDirectory"],
+      params[0]
+    );
     const isFile = await checkPath(pathFileToRemove, "file");
-    if (!isFile) throw new Error("file does not exist");
+    if (!isFile) throw new Error("Invalid input");
 
     await fs.rm(pathFileToRemove);
   } catch {
-    console.log("\x1b[31mOperation failed\x1b[0m");
+    let errMessage = "Operation failed";
+    if (err.message === "Invalid input") {
+      errMessage = "Invalid input";
+    }
+    console.log(`\x1b[31m${errMessage}\x1b[0m`);
   }
 };

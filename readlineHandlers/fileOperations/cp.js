@@ -6,28 +6,35 @@ import { checkPath } from "../../utils/checkPath.js";
 export const cp = async (input, directory) => {
   try {
     const params = getUserParamsArr(input);
-    if (params.length !== 2) throw new Error("Enter correct params");
+    if (params.length !== 2) throw new Error("Invalid input");
 
     const baseFilePath = path.resolve(directory["currentDirectory"], params[0]);
     const isFile = await checkPath(baseFilePath, "file");
-    if (!isFile) throw new Error("file does not exist");
+    if (!isFile) throw new Error("Invalid input");
 
-    const newFileDirectory = path.resolve(directory["currentDirectory"], params[1]);
+    const newFileDirectory = path.resolve(
+      directory["currentDirectory"],
+      params[1]
+    );
     const isDirectory = await checkPath(newFileDirectory, "dir");
-    if (!isDirectory) throw new Error("directory does not exist");
+    if (!isDirectory) throw new Error("Invalid input");
 
     const fileName = path.basename(baseFilePath);
-    const newFilePath = path.join(newFileDirectory,fileName)
+    const newFilePath = path.join(newFileDirectory, fileName);
 
     await new Promise((resolve, reject) => {
-        const readStream = createReadStream(baseFilePath);
-        const writeStream = createWriteStream(newFilePath, { flags: "wx" });
-        readStream.on("error", (e) => reject(`reading error: ${e.message}`));
-        writeStream.on("error", (e) => reject(`writing error: ${e.message}`));
-        writeStream.on("close", resolve);
-        readStream.pipe(writeStream);
-    })
+      const readStream = createReadStream(baseFilePath);
+      const writeStream = createWriteStream(newFilePath, { flags: "wx" });
+      readStream.on("error", (e) => reject(`reading error: ${e.message}`));
+      writeStream.on("error", (e) => reject(`writing error: ${e.message}`));
+      writeStream.on("close", resolve);
+      readStream.pipe(writeStream);
+    });
   } catch {
-    console.log("\x1b[31mOperation failed\x1b[0m");
+    let errMessage = "Operation failed";
+    if (err.message === "Invalid input") {
+      errMessage = "Invalid input";
+    }
+    console.log(`\x1b[31m${errMessage}\x1b[0m`);
   }
 };
