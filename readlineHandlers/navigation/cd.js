@@ -12,6 +12,6 @@ export const cd = async(input, directory) => {
     if (!isDir) throw new Error(`Directory does not exist: ${newPath}`);
     directory["currentDirectory"] = newPath;
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

@@ -33,6 +33,6 @@ export async function handleInputResult(input, rl, directory) {
   } else if (input.startsWith("rm")) {
     await rm(input, directory)
   } else {
-    console.log(`Invalid input`);
+    console.log("\x1b[31mInvalid input\x1b[0m");
   } 
 }

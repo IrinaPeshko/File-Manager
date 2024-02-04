@@ -14,6 +14,6 @@ export const rm = async (input, directory) => {
 
     await fs.rm(pathFileToRemove);
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

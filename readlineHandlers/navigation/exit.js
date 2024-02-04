@@ -3,6 +3,6 @@ export const exit = (rl) => {
     rl.close();
     process.exit(0);
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

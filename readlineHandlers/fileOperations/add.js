@@ -9,6 +9,6 @@ export const add = async (input, directory) => {
     const pathToFile = path.resolve(directory["currentDirectory"], params[0]);
     await fs.promises.writeFile(pathToFile, '', { flag: "wx" });
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

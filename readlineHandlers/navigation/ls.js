@@ -22,6 +22,6 @@ export const ls = async (directory) => {
     
     console.table(directoryArr.concat(filesArr, otherArr));
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

@@ -16,6 +16,6 @@ export const rn = async (input, directory) => {
     const newFilePath = path.join(lastFileDirectory, params[1])
     await fs.rename(lastFilePath, newFilePath);
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };

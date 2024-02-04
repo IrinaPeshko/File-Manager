@@ -37,6 +37,6 @@ export const mv = async (input, directory) => {
       writeStream.on("error", reject);
     });
   } catch {
-    console.log("Operation failed");
+    console.log("\x1b[31mOperation failed\x1b[0m");
   }
 };
