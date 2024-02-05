@@ -8,17 +8,19 @@ export function getUserParamsArr(input) {
   if (splitParams.length === 1) return [];
 
   if (splitParams.length > 1) {
-    const currentParams = splitParams.slice(1).join(" ");
+    const currentParams = input
+      .trim()
+      .replace(/^[^\s]+(\s|$)/, "")
+      .trim();
     const isQuotes = currentParams.match(/"/g);
     if (isQuotes) {
       let newParams = currentParams
-        .trim()
         .split(`"`)
         .filter((el) => el !== "")
         .map((el) => el.trim());
       params = newParams;
     } else {
-      params = currentParams.split(" ");
+      params = currentParams.replace(/\s+/g, " ").split(" ");
     }
     return params;
   }
