@@ -10,6 +10,7 @@ import { mv } from "../readlineHandlers/fileOperations/mv.js";
 import { rm } from "../readlineHandlers/fileOperations/rm.js";
 import { getSystemInfo } from "../readlineHandlers/systemInfo/os.js";
 import { hash } from "../readlineHandlers/hash/hash.js";
+import { compress } from "../readlineHandlers/compress/compress.js";
 
 export async function handleInputResult(input, rl, directory) {
   if (input === "hello") {
@@ -17,28 +18,30 @@ export async function handleInputResult(input, rl, directory) {
   } else if (input === "up") {
     up(directory);
   } else if (input === "ls") {
-    await ls(directory)
+    await ls(directory);
   } else if (input === ".exit") {
-    exit(rl)
+    exit(rl);
   } else if (input.startsWith("cd")) {
-    await cd(input, directory)
+    await cd(input, directory);
   } else if (input.startsWith("cat")) {
-    await cat(input, directory)
+    await cat(input, directory);
   } else if (input.startsWith("add")) {
-    await add(input, directory)
+    await add(input, directory);
   } else if (input.startsWith("rn")) {
-    await rn(input, directory)
+    await rn(input, directory);
   } else if (input.startsWith("cp")) {
-    await cp(input, directory)
+    await cp(input, directory);
   } else if (input.startsWith("mv")) {
-    await mv(input, directory)
+    await mv(input, directory);
   } else if (input.startsWith("rm")) {
-    await rm(input, directory)
+    await rm(input, directory);
   } else if (input.startsWith("os")) {
-    await getSystemInfo(input, directory)
+    await getSystemInfo(input, directory);
   } else if (input.startsWith("hash")) {
-    await hash(input, directory)
+    await hash(input, directory);
+  } else if (input.startsWith("compress") || input.startsWith("decompress")) {
+    await compress(input, directory);
   } else {
     console.log("\x1b[31mInvalid input\x1b[0m");
-  } 
+  }
 }
