@@ -9,7 +9,7 @@ export const cd = async(input, directory) => {
     const currentDirectory = directory["currentDirectory"];
     const newPath = path.resolve(currentDirectory, params[0]);
     const isDir = await checkPath(newPath, "dir");
-    if (!isDir) throw new Error(`"Invalid input"`);
+    if (!isDir) throw new Error("Invalid path to directory");
     directory["currentDirectory"] = newPath;
   } catch (err) {
     let errMessage = "Operation failed";

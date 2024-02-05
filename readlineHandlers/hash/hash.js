@@ -10,7 +10,7 @@ export const hash = async (input, directory) => {
     if (params.length !== 1) throw new Error("Invalid input");
     const pathToFile = path.resolve(directory["currentDirectory"], params[0]);
     const isFile = await checkPath(pathToFile, "file");
-    if (!isFile) throw new Error("Invalid input");
+    if (!isFile) throw new Error("Invalid path to file");
 
     const stringToHash = await fs.readFile(pathToFile, "utf8");
     const hash = createHash("sha256").update(stringToHash).digest("hex");

@@ -10,14 +10,14 @@ export const mv = async (input, directory) => {
 
     const baseFilePath = path.resolve(directory["currentDirectory"], params[0]);
     const isFile = await checkPath(baseFilePath, "file");
-    if (!isFile) throw new Error("Invalid input");
+    if (!isFile) throw new Error("Invalid path to file");
 
     const newFileDirectory = path.resolve(
       directory["currentDirectory"],
       params[1]
     );
     const isDirectory = await checkPath(newFileDirectory, "dir");
-    if (!isDirectory) throw new Error("Invalid input");
+    if (!isDirectory) throw new Error("Invalid path to directory");
 
     const fileName = path.basename(baseFilePath);
     const newFilePath = path.join(newFileDirectory, fileName);

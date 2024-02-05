@@ -10,7 +10,7 @@ export const rn = async (input, directory) => {
 
     const lastFilePath = path.resolve(directory["currentDirectory"], params[0]);
     const isFile = await checkPath(lastFilePath, "file");
-    if (!isFile) throw new Error("Invalid input");
+    if (!isFile) throw new Error("Invalid path to file");
 
     const lastFileDirectory = path.dirname(lastFilePath);
     const newFilePath = path.join(lastFileDirectory, params[1]);

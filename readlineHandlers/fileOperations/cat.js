@@ -9,7 +9,7 @@ export const cat = async (input, directory) => {
     if (params.length !== 1) throw new Error("Invalid input");
     const filePath = path.join(directory["currentDirectory"], params[0]);
     const isFile = await checkPath(filePath, "file");
-    if (!isFile) throw new Error("Invalid input");
+    if (!isFile) throw new Error("Invalid path to file");
     const readableStream = createReadStream(filePath, "utf8");
     await new Promise((resolve, reject) => {
       readableStream.on("error", (err) => {

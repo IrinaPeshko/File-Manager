@@ -13,7 +13,7 @@ export const rm = async (input, directory) => {
       params[0]
     );
     const isFile = await checkPath(pathFileToRemove, "file");
-    if (!isFile) throw new Error("Invalid input");
+    if (!isFile) throw new Error("Invalid path to file");
 
     await fs.rm(pathFileToRemove);
   } catch (err) {
